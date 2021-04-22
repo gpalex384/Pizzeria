@@ -158,7 +158,7 @@ public class FXMLPizzeriaController implements Initializable {
     }
 
     @FXML
-    private void generarTicket(ActionEvent event) {
+    private void generarTicket(ActionEvent event) {     // AÑADIR FILE CHOOSER situado en carpeta tickets
         contTicket++;
         Path ruta = Paths.get("tickets/ticket" + contTicket + ".txt");
         File acceso = ruta.toFile();

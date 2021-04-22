@@ -36,7 +36,7 @@ public final class Precios {
         precios.put("Sin gratinar", 1.00);
     }
 
-    public void cargaPrecios(Path archivo) {
+    public void cargaPrecios(Path archivo) {    // AÑADIR FILE CHOOSER situado en carpeta precios
         String line;
         File file = archivo.toFile();
         try ( BufferedReader reader = new BufferedReader(new FileReader(file))) {
