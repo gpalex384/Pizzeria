@@ -162,7 +162,7 @@ public class FXMLPizzeriaController implements Initializable {
     private void generarTicket(ActionEvent event) {
         pizza.setNumTicket();
         final DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setInitialDirectory(new File("tickets/"));
+        directoryChooser.setInitialDirectory(new File("tickets"));
         File file = directoryChooser.showDialog(null);
         String fileName = file.toString() + "/ticket" + pizza.getNumTicket() + ".txt";
         File ruta = new File(fileName);
@@ -170,7 +170,7 @@ public class FXMLPizzeriaController implements Initializable {
             pizza.generarTicket(ruta.toPath());
             taPedido.appendText("Ticket guardado --> " + ruta.getPath() + "\n");
         } else {
-            taPedido.appendText("El ticket ya existe\n");
+            taPedido.appendText("El ticket " + "ticket" + pizza.getNumTicket() + ".txt ya existe\n");
         }
     }
 

@@ -1,0 +1,12 @@
+23/04/2021 - 07:54:41 AM
+
+Nº DE TICKET 1
+
+MASA: Normal - 15,00€
+TIPO: Cuatro quesos - 9,00€
+INGREDIENTES EXTRA: [jamón] - 3,50€
+TAMAÑO: mediana + 15%
+GRATINAR (+2%): Gratinada
+BEBIDA (2€): Con bebida
+
+TOTAL: 34,60 €

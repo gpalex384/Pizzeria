@@ -116,7 +116,7 @@ public class Pizza {
             bw.write("" + fecha.format(date) + " - " + hora.format(date));
             bw.newLine();
             bw.newLine();
-            bw.write("Nº DE TICKET " + contTicket);
+            bw.write("Nº DE TICKET " + getNumTicket());
             bw.newLine();
             bw.newLine();
             bw.write("MASA: " + masa + String.format(" - %.2f", PRECIO.getPrecio(masa)) + "€");

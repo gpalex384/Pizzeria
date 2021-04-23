@@ -1,17 +1,17 @@
 @MASA
-Normal:9.00
-Integral:9.50
+Normal:15.00
+Integral:17.50
 @TIPO
-Básica:3.00
-Cuatro quesos:5.00
-Barbacoa:7.00
-Mexicana:8.50
+Básica:5.00
+Cuatro quesos:9.00
+Barbacoa:12.00
+Mexicana:15.50
 @INGREDIENTES
-jamón:1.50
-queso:1.75
-tomate:1.50
-cebolla:0.50
-olivas:1.00
+jamón:3.50
+queso:3.75
+tomate:2.50
+cebolla:1.50
+olivas:2.00
 @TAMAÑO
 pequeña:1.00
 mediana:1.15

@@ -1,0 +1,5 @@
+clase ticket
+
+seleccionar numero de bebidas
+
+varias pizzas

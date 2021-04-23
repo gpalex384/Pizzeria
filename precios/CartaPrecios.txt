@@ -1,6 +1,6 @@
 @MASA
-Normal:9.00
-Integral:9.50
+Normal:7.00
+Integral:7.50
 @TIPO
 Básica:3.00
 Cuatro quesos:5.00
