@@ -21,21 +21,22 @@ public class Pizza {
     private Set<String> ingredientes = new HashSet<>();
     private final Precios PRECIO = new Precios();
     private double precioIngr = 0.00;
+    private double precioBebidas = 0.00;
     private int numBebidas = 0;
     private static int contTicket = 0;
     Date date = new Date();
     SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
     SimpleDateFormat hora = new SimpleDateFormat("hh:mm:ss aa");
-    
-    public Pizza(){
-        
+
+    public Pizza() {
+
     }
-    
-    public int getNumBebidas(){
+
+    public int getNumBebidas() {
         return numBebidas;
     }
-    
-    public void setNumBebidas(int numBebidas){
+
+    public void setNumBebidas(int numBebidas) {
         this.numBebidas = numBebidas;
     }
 
@@ -94,19 +95,26 @@ public class Pizza {
                 + "INGREDIENTES EXTRA: " + ingredientes.toString() + " - " + String.format("%.2f", precioIngr) + "€\n"
                 + "TAMAÑO: " + tamano + " + " + String.format("%.0f", porcentaje) + "%\n"
                 + "GRATINAR (+2%): " + gratinada + "\n"
-                + "BEBIDA (2€): " + bebida + " X" + numBebidas + "\n";
+                + "BEBIDA (2€): " + bebida + String.format(" - %.2f", precioBebidas) + "€\n";
         return pedido;
     }
 
     public double calcularPrecio() {
-        double precioTot;
+        double precioTot = 0.00;
         precioIngr = 0.00;
+        precioBebidas = PRECIO.getPrecio("Con bebida") * numBebidas;
         if (ingredientes.isEmpty() == false) {
             ingredientes.forEach(ingrediente -> {
                 precioIngr += PRECIO.getPrecio(ingrediente);
             });
         }
-        precioTot = ((PRECIO.getPrecio(masa) + PRECIO.getPrecio(tipo) + precioIngr) * PRECIO.getPrecio(tamano) * PRECIO.getPrecio(gratinada))+ (PRECIO.getPrecio(bebida)*numBebidas);
+        if ("Sin bebida".equalsIgnoreCase(getBebida())) {
+            precioTot = ((PRECIO.getPrecio(masa) + PRECIO.getPrecio(tipo)
+                    + precioIngr) * PRECIO.getPrecio(tamano) * PRECIO.getPrecio(gratinada));
+        } else if ("Con bebida".equalsIgnoreCase(getBebida())) {
+            precioTot = ((PRECIO.getPrecio(masa) + PRECIO.getPrecio(tipo)
+                    + precioIngr) * PRECIO.getPrecio(tamano) * PRECIO.getPrecio(gratinada)) + precioBebidas;
+        }
         return precioTot;
     }
 
@@ -138,7 +146,11 @@ public class Pizza {
             bw.newLine();
             bw.write("GRATINAR (+2%): " + gratinada);
             bw.newLine();
-            bw.write("BEBIDA (2€): " + bebida + " X" + numBebidas);
+            if ("Sin bebida".equalsIgnoreCase(getBebida())) {
+                bw.write("BEBIDA (2€): " + bebida + " - 0.00 €");
+            } else if ("Con bebida".equalsIgnoreCase(getBebida())) {
+                bw.write("BEBIDA (2€): " + bebida + " X" + numBebidas + String.format(" - %.2f", precioBebidas) + "€");
+            }
             bw.newLine();
             bw.newLine();
             bw.write("TOTAL: " + String.format("%.2f", calcularPrecio()) + " €");

@@ -69,8 +69,7 @@ public class FXMLPizzeriaController implements Initializable {
     private double precioFinal = 0.00;
     private Pizza pizza = new Pizza();
     private Precios precio = new Precios();
-    private static int contTicket = 0;
-    private int numBebidas = 0;
+    private static final int contTicket = 0;
 
     ObservableList<String> tamaños
             = FXCollections.observableArrayList("pequeña", "mediana", "familiar");
@@ -142,6 +141,7 @@ public class FXMLPizzeriaController implements Initializable {
             pizza.setNumBebidas(spBebidas.getValue());
         } else {
             pizza.setBebida("Sin bebida");
+            pizza.setNumBebidas(0);
         }
     }
 
