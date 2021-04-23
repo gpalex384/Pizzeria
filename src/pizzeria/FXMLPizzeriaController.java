@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Optional;
@@ -71,11 +73,16 @@ public class FXMLPizzeriaController implements Initializable {
     private CheckBox cbBebida;
     @FXML
     private Button btAbrirTicket;
+    @FXML
+    private Label lbFechaHora;
 
     private double precioFinal = 0.00;
     private Pizza pizza = new Pizza();
     private Precios precio = new Precios();
     private static int contTicket = 0;
+    Date date = new Date();
+    SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat hora = new SimpleDateFormat("hh:mm:ss aa");
 
     ObservableList<String> tamaños
             = FXCollections.observableArrayList("pequeña", "mediana", "familiar");
@@ -103,6 +110,7 @@ public class FXMLPizzeriaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         alertaPrecios();
+        lbFechaHora.setText("" + fecha.format(date) + " - " + hora.format(date));
         btMasaNormal.setSelected(true);
         comboTipos.setItems(tiposList);
         comboTipos.setValue("Básica");

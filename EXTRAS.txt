@@ -2,5 +2,5 @@
 
 - abrir tickets
 
-- label fecha y hora	 //falta
+- label fecha y hora	
 
