@@ -4,9 +4,7 @@ import MODELO.Pizza;
 import MODELO.Precios;
 import java.io.File;
 import java.net.URL;
-import java.nio.file.DirectoryStream.Filter;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -30,11 +28,8 @@ import javafx.scene.control.SpinnerValueFactory.ListSpinnerValueFactory;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class FXMLPizzeriaController implements Initializable {
 
@@ -148,7 +143,7 @@ public class FXMLPizzeriaController implements Initializable {
             pizza.setGratinada("Sin gratinar");
         }
     }
-
+    
     @FXML
     private void calcularTotal() {
         taPedido.setText("");
@@ -164,15 +159,18 @@ public class FXMLPizzeriaController implements Initializable {
     }
 
     @FXML
-    private void generarTicket(ActionEvent event) {     // AÑADIR FILE CHOOSER situado en carpeta tickets
-        // Avisar del nombre del ticket y su localización (ruta) // EXTRA: Clase Tickets
-        contTicket++;
-        Path ruta = Paths.get("tickets/ticket" + contTicket + ".txt");
-        File acceso = ruta.toFile();
-        if (acceso.exists() == false) {
-            pizza.generarTicket(ruta);
+    private void generarTicket(ActionEvent event) {
+        pizza.setNumTicket();
+        final DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setInitialDirectory(new File("tickets/"));
+        File file = directoryChooser.showDialog(null);
+        String fileName = file.toString() + "/ticket" + pizza.getNumTicket() + ".txt";
+        File ruta = new File(fileName);
+        if (ruta.exists() == false) {
+            pizza.generarTicket(ruta.toPath());
+            taPedido.appendText("Ticket guardado --> " + ruta.getPath() + "\n");
         } else {
-            taPedido.appendText("Ya existe un ticket con el numero " + contTicket + "\n");
+            taPedido.appendText("El ticket ya existe\n");
         }
     }
 
@@ -196,7 +194,7 @@ public class FXMLPizzeriaController implements Initializable {
         }
     }
 
-    private Path abrirPrecios() {               //    EXTENSION FILTER .txt    //
+    private Path abrirPrecios() {
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File("precios/"));
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT", "*.txt"));

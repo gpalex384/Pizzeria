@@ -101,10 +101,17 @@ public class Pizza {
         return precioTot;
     }
 
+    public int getNumTicket() {
+        return contTicket;
+    }
+
+    public void setNumTicket() {
+        contTicket++;
+    }
+
     public boolean generarTicket(Path ruta) {
         try (
                  OutputStream os = new FileOutputStream(ruta.toFile());  BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os))) {
-            contTicket++;
             double porcentaje = (PRECIO.getPrecio(tamano) - 1) * 100;
             bw.write("" + fecha.format(date) + " - " + hora.format(date));
             bw.newLine();
