@@ -3,12 +3,16 @@ package pizzeria;
 import MODELO.Pizza;
 import MODELO.Precios;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.stream.Stream;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -65,15 +69,17 @@ public class FXMLPizzeriaController implements Initializable {
     private CheckBox cbGratinar;
     @FXML
     private CheckBox cbBebida;
+    @FXML
+    private Button btAbrirTicket;
 
     private double precioFinal = 0.00;
     private Pizza pizza = new Pizza();
     private Precios precio = new Precios();
-    private static final int contTicket = 0;
+    private static int contTicket = 0;
 
     ObservableList<String> tamaños
             = FXCollections.observableArrayList("pequeña", "mediana", "familiar");
-    
+
     ObservableList<Integer> bebidas
             = FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
@@ -152,7 +158,7 @@ public class FXMLPizzeriaController implements Initializable {
             pizza.setGratinada("Sin gratinar");
         }
     }
-    
+
     @FXML
     private void calcularTotal() {
         taPedido.setText("");
@@ -212,6 +218,27 @@ public class FXMLPizzeriaController implements Initializable {
             return file.toPath();
         }
         return null;
+    }
+
+    @FXML
+    private void abrirTicket(ActionEvent event) {
+        final FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File("tickets/"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT", "*.txt"));
+        File file = fileChooser.showOpenDialog(null);
+        Path archivo = file.toPath();
+
+        try ( Stream<String> datos = Files.lines(archivo)) {
+            Iterator<String> it = datos.iterator();
+            taPedido.setText("");
+            while (it.hasNext()) {
+                String linea = it.next();
+                taPedido.appendText(linea + "\n");
+            }
+        } catch (IOException ex) {
+            System.out.println("Error en la lectura del archivo");
+        }
+
     }
 
 }
