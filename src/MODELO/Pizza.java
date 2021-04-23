@@ -98,7 +98,7 @@ public class Pizza {
         return pedido;
     }
 
-    public double calcularPrecio() {
+    public double calcularPrecio() {    // SET DE PIZZAS
         double precioTot;
         precioIngr = 0.00;
         if (ingredientes.isEmpty() == false) {
@@ -118,7 +118,7 @@ public class Pizza {
         contTicket++;
     }
 
-    public boolean generarTicket(Path ruta) {
+    public boolean generarTicket(Path ruta) {   // SET DE PIZZAS
         try (
                  OutputStream os = new FileOutputStream(ruta.toFile());  BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os))) {
             double porcentaje = (PRECIO.getPrecio(tamano) - 1) * 100;

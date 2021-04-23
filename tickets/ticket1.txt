@@ -1,0 +1,12 @@
+23/04/2021 - 09:06:23 AM
+
+Nº DE TICKET 1
+
+MASA: Integral - 3,50€
+TIPO: Cuatro quesos - 5,00€
+INGREDIENTES EXTRA: [tomate, olivas, jamón, queso, cebolla] - 4,50€
+TAMAÑO: familiar + 30%
+GRATINAR (+2%): Gratinada
+BEBIDA (2€): Con bebida X3
+
+TOTAL: 23,24 €
