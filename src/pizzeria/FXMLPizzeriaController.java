@@ -4,6 +4,7 @@ import MODELO.Pizza;
 import MODELO.Precios;
 import java.io.File;
 import java.net.URL;
+import java.nio.file.DirectoryStream.Filter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashSet;
@@ -29,6 +30,11 @@ import javafx.scene.control.SpinnerValueFactory.ListSpinnerValueFactory;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class FXMLPizzeriaController implements Initializable {
 
@@ -159,6 +165,7 @@ public class FXMLPizzeriaController implements Initializable {
 
     @FXML
     private void generarTicket(ActionEvent event) {     // AÑADIR FILE CHOOSER situado en carpeta tickets
+        // Avisar del nombre del ticket y su localización (ruta) // EXTRA: Clase Tickets
         contTicket++;
         Path ruta = Paths.get("tickets/ticket" + contTicket + ".txt");
         File acceso = ruta.toFile();
@@ -184,9 +191,20 @@ public class FXMLPizzeriaController implements Initializable {
         if (result.get() == buttonDefault) {
             precio.setPrecios();
         } else if (result.get() == buttonArchivo) {
-            Path archivo = Paths.get("precios/CartaPrecios.txt");
+            Path archivo = abrirPrecios();
             precio.cargaPrecios(archivo);
         }
+    }
+
+    private Path abrirPrecios() {               //    EXTENSION FILTER .txt    //
+        final FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File("precios/"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT", "*.txt"));
+        File file = fileChooser.showOpenDialog(null);
+        if (file != null) {
+            return file.toPath();
+        }
+        return null;
     }
 
 }
