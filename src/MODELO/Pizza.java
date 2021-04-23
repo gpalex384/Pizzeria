@@ -21,10 +21,23 @@ public class Pizza {
     private Set<String> ingredientes = new HashSet<>();
     private final Precios PRECIO = new Precios();
     private double precioIngr = 0.00;
+    private int numBebidas = 0;
     private static int contTicket = 0;
     Date date = new Date();
     SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
     SimpleDateFormat hora = new SimpleDateFormat("hh:mm:ss aa");
+    
+    public Pizza(){
+        
+    }
+    
+    public int getNumBebidas(){
+        return numBebidas;
+    }
+    
+    public void setNumBebidas(int numBebidas){
+        this.numBebidas = numBebidas;
+    }
 
     public String getGratinada() {
         return gratinada;
@@ -40,9 +53,6 @@ public class Pizza {
 
     public void setBebida(String bebida) {
         this.bebida = bebida;
-    }
-
-    public Pizza() {
     }
 
     public String getMasa() {
@@ -84,7 +94,7 @@ public class Pizza {
                 + "INGREDIENTES EXTRA: " + ingredientes.toString() + " - " + String.format("%.2f", precioIngr) + "€\n"
                 + "TAMAÑO: " + tamano + " + " + String.format("%.0f", porcentaje) + "%\n"
                 + "GRATINAR (+2%): " + gratinada + "\n"
-                + "BEBIDA (2€): " + bebida + "\n";
+                + "BEBIDA (2€): " + bebida + " X" + numBebidas + "\n";
         return pedido;
     }
 
@@ -96,8 +106,7 @@ public class Pizza {
                 precioIngr += PRECIO.getPrecio(ingrediente);
             });
         }
-        precioTot = (PRECIO.getPrecio(masa) + PRECIO.getPrecio(tipo) + precioIngr
-                + PRECIO.getPrecio(bebida)) * PRECIO.getPrecio(tamano) * PRECIO.getPrecio(gratinada);
+        precioTot = ((PRECIO.getPrecio(masa) + PRECIO.getPrecio(tipo) + precioIngr) * PRECIO.getPrecio(tamano) * PRECIO.getPrecio(gratinada))+ (PRECIO.getPrecio(bebida)*numBebidas);
         return precioTot;
     }
 
@@ -129,7 +138,7 @@ public class Pizza {
             bw.newLine();
             bw.write("GRATINAR (+2%): " + gratinada);
             bw.newLine();
-            bw.write("BEBIDA (2€): " + bebida);
+            bw.write("BEBIDA (2€): " + bebida + " X" + numBebidas);
             bw.newLine();
             bw.newLine();
             bw.write("TOTAL: " + String.format("%.2f", calcularPrecio()) + " €");

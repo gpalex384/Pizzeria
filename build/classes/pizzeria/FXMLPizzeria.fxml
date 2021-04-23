@@ -94,11 +94,12 @@
          </font>
       </Label>
       <CheckBox fx:id="cbGratinar" layoutX="590.0" layoutY="144.0" mnemonicParsing="false" onAction="#calcularTotal" text="Gratinar" />
-      <CheckBox fx:id="cbBebida" layoutX="590.0" layoutY="179.0" mnemonicParsing="false" onAction="#calcularTotal" text="Incluir bebida" />
+      <CheckBox fx:id="cbBebida" layoutX="590.0" layoutY="179.0" mnemonicParsing="false" onAction="#calcularTotal" text="Incluir bebidas" />
       <Button fx:id="btGenerarTicket" layoutX="558.0" layoutY="413.0" mnemonicParsing="false" onAction="#generarTicket" prefHeight="41.0" prefWidth="192.0" text="GENERAR TICKET">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
+      <Spinner fx:id="spBebidas" layoutX="652.0" layoutY="213.0" onMouseClicked="#calcularTotal" prefHeight="41.0" prefWidth="64.0" />
    </children>
 </AnchorPane>

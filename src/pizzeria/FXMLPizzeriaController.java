@@ -60,6 +60,8 @@ public class FXMLPizzeriaController implements Initializable {
     @FXML
     private Spinner<String> spTamaño;
     @FXML
+    private Spinner<Integer> spBebidas;
+    @FXML
     private CheckBox cbGratinar;
     @FXML
     private CheckBox cbBebida;
@@ -68,9 +70,13 @@ public class FXMLPizzeriaController implements Initializable {
     private Pizza pizza = new Pizza();
     private Precios precio = new Precios();
     private static int contTicket = 0;
+    private int numBebidas = 0;
 
     ObservableList<String> tamaños
             = FXCollections.observableArrayList("pequeña", "mediana", "familiar");
+    
+    ObservableList<Integer> bebidas
+            = FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
     ObservableList<String> tiposList
             = FXCollections.observableArrayList(
@@ -99,6 +105,8 @@ public class FXMLPizzeriaController implements Initializable {
         taIngredExtra.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         ListSpinnerValueFactory<String> valores = new ListSpinnerValueFactory(tamaños);
         spTamaño.setValueFactory(valores);
+        ListSpinnerValueFactory<Integer> valores2 = new ListSpinnerValueFactory(bebidas);
+        spBebidas.setValueFactory(valores2);
         calcularTotal();
     }
 
@@ -131,6 +139,7 @@ public class FXMLPizzeriaController implements Initializable {
     private void setBebida() {
         if (cbBebida.isSelected()) {
             pizza.setBebida("Con bebida");
+            pizza.setNumBebidas(spBebidas.getValue());
         } else {
             pizza.setBebida("Sin bebida");
         }
@@ -170,7 +179,7 @@ public class FXMLPizzeriaController implements Initializable {
             pizza.generarTicket(ruta.toPath());
             taPedido.appendText("Ticket guardado --> " + ruta.getPath() + "\n");
         } else {
-            taPedido.appendText("El ticket " + "ticket" + pizza.getNumTicket() + ".txt ya existe\n");
+            taPedido.appendText("El ticket -> " + "ticket" + pizza.getNumTicket() + ".txt ya existe\n");
         }
     }
 

@@ -1,4 +1,3 @@
-clase ticket
 
 seleccionar numero de bebidas
 
