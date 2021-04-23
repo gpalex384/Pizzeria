@@ -71,7 +71,6 @@ public class FXMLPizzeriaController implements Initializable {
     private Precios precio = new Precios();
     private static int contTicket = 0;
     private int numBebidas = 0;
-    private Set<Pizza> pizzas = new HashSet<>();
 
     ObservableList<String> tamaños
             = FXCollections.observableArrayList("pequeña", "mediana", "familiar");
@@ -163,14 +162,13 @@ public class FXMLPizzeriaController implements Initializable {
         setTamano();
         setBebida();
         setGratinada();
-        pizzas.add(pizza);  // CALCULAR PRECIO SET DE PIZZAS
         precioFinal = pizza.calcularPrecio();
         lbTotal.setText(String.format("%.2f", precioFinal) + " €");
         taPedido.setText(pizza.composicion());
     }
 
     @FXML
-    private void generarTicket(ActionEvent event) {     // TICKET SET DE PIZZAS
+    private void generarTicket(ActionEvent event) {
         pizza.setNumTicket();
         final DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setInitialDirectory(new File("tickets"));
