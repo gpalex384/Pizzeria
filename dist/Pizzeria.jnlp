@@ -8,8 +8,8 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Pizzeria.jar" size="13534" download="eager" />
+    <jar href="Pizzeria.jar" size="211085" download="eager" />
   </resources>
-  <jfx:javafx-desc  width="800" height="600" main-class="pizzeria.Pizzeria"  name="Pizzeria" />
+  <jfx:javafx-desc  width="800" height="600" main-class="VISTA.Pizzeria"  name="Pizzeria" />
   <update check="always"/>
 </jnlp>

@@ -1,0 +1,51 @@
+.AnchorPane {
+    -fx-background-image: url('"img/fondo.jpg"');
+    -fx-background-size: 100%;
+}
+
+.button{
+    -fx-text-fill: #ed1943;
+    -fx-background-image: url("'img/cheese.jpg'");
+}
+
+.label {
+    -fx-text-fill: white;
+}
+
+.tabPane:top{
+    -fx-background-image: url('"img/fondoPizzas.jpg"');
+    -fx-border-color: #ed1943;
+    -fx-border-width: 3px;
+} 
+
+.tabPane:top.img{
+    -fx-opacity: 0.5;
+}
+
+.tab-header-background{
+    -fx-background-color: #ed1943;
+}
+.tab:selected:top{
+    -fx-background-color: #ed1943;
+}
+.tab:top{
+    -fx-background-color: #005f35;
+    -fx-font-size: 1.5em;
+    -fx-font-weight: bold;
+}
+
+.tabPane:top .tab-header-area .headers-region .tab:top .tab-container .tab-label .text{
+    -fx-fill: white;
+}
+
+.tabPane:top .tab-header-area .headers-region .tab:top{
+    -fx-padding: 10px;
+}
+
+.listView {
+    -fx-background-color: #ed1943;
+}
+
+.checkBox:determinate .box{
+    -fx-background-color: #ed1943;
+}

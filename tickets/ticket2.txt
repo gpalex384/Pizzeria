@@ -1,12 +1,12 @@
-23/04/2021 - 11:10:39 PM
+24/04/2021 - 03:55:48 AM
 
 Nº DE TICKET 2
 
-MASA: Integral - 3,50€
+MASA: Normal - 3,00€
 TIPO: Básica - 3,00€
-INGREDIENTES EXTRA: [tomate] - 1,50€
-TAMAÑO: mediana + 15%
+INGREDIENTES EXTRA: [] - 0,00€
+TAMAÑO: pequeña + 0%
 GRATINAR (+2%): Sin gratinar
-BEBIDA (2€): Con bebida X2 - 4,00€
+BEBIDA (2€): Sin bebida - 0.00 €
 
-TOTAL: 13,20 €
+TOTAL: 6,00 €

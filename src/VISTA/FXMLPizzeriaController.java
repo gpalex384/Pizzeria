@@ -1,4 +1,4 @@
-package pizzeria;
+package VISTA;
 
 import MODELO.Pizza;
 import MODELO.Precios;
@@ -21,7 +21,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -31,7 +30,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory.ListSpinnerValueFactory;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.DirectoryChooser;
@@ -40,17 +38,7 @@ import javafx.stage.FileChooser;
 public class FXMLPizzeriaController implements Initializable {
 
     @FXML
-    private Tab tabMasa;
-    @FXML
     private ToggleGroup masa;
-    @FXML
-    private Tab tabTipo;
-    @FXML
-    private Tab tabIngExtra;
-    @FXML
-    private Tab tabTamano;
-    @FXML
-    private Button btGenerarTicket;
     @FXML
     private RadioButton btMasaNormal;
     @FXML
@@ -71,8 +59,6 @@ public class FXMLPizzeriaController implements Initializable {
     private CheckBox cbGratinar;
     @FXML
     private CheckBox cbBebida;
-    @FXML
-    private Button btAbrirTicket;
     @FXML
     private Label lbFechaHora;
 
