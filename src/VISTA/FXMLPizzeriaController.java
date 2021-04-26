@@ -32,8 +32,10 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory.ListSpinnerValueFactory;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class FXMLPizzeriaController implements Initializable {
 
@@ -167,7 +169,7 @@ public class FXMLPizzeriaController implements Initializable {
         taPedido.setText(pizza.composicion());
     }
 
-    @FXML
+    @FXML                                                   // mejorar guardado
     private void generarTicket(ActionEvent event) {
         pizza.setNumTicket();
         final DirectoryChooser directoryChooser = new DirectoryChooser();
@@ -179,7 +181,9 @@ public class FXMLPizzeriaController implements Initializable {
             pizza.generarTicket(ruta.toPath());
             taPedido.appendText("Ticket guardado --> " + ruta.getPath() + "\n");
         } else {
-            taPedido.appendText("El ticket -> " + "ticket" + pizza.getNumTicket() + ".txt ya existe\n");
+            taPedido.appendText("El ticket -> " + "ticket" + pizza.getNumTicket() + ".txt ya existe\nElige otro nombre \n");
+//  Elegir otro nombre        
+
         }
     }
 
@@ -188,6 +192,9 @@ public class FXMLPizzeriaController implements Initializable {
         confirmacion.setTitle("Proyecto Pizzeria");
         confirmacion.setHeaderText("Necesita cargar los precios");
         confirmacion.setContentText("¿Qué precios desea cargar?");
+    
+        Stage stage = (Stage) confirmacion.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("file:resources/images/icon.png"));
 
         ButtonType buttonDefault = new ButtonType("Por defecto");
         ButtonType buttonArchivo = new ButtonType("Archivo de texto");

@@ -95,7 +95,7 @@ public class Pizza {
                 + "INGREDIENTES EXTRA: " + ingredientes.toString() + " - " + String.format("%.2f", precioIngr) + "€\n"
                 + "TAMAÑO: " + tamano + " + " + String.format("%.0f", porcentaje) + "%\n"
                 + "GRATINAR (+2%): " + gratinada + "\n"
-                + "BEBIDA (2€): " + bebida + " X" + numBebidas + String.format(" - %.2f", precioBebidas) + "€";
+                + "BEBIDA (2€): " + bebida + " X" + numBebidas + String.format(" - %.2f", precioBebidas) + "€\n";
         return pedido;
     }
 
@@ -126,7 +126,7 @@ public class Pizza {
         contTicket++;
     }
 
-    public boolean generarTicket(Path ruta) {
+    public boolean generarTicket(Path ruta) {           // mejorar guardado
         try (
                  OutputStream os = new FileOutputStream(ruta.toFile());  BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os))) {
             double porcentaje = (PRECIO.getPrecio(tamano) - 1) * 100;
