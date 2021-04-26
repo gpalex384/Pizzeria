@@ -68,7 +68,6 @@ public class FXMLPizzeriaController implements Initializable {
     private double precioFinal = 0.00;
     private Pizza pizza = new Pizza();
     private Precios precio = new Precios();
-    private static int contTicket = 0;
     Date date = new Date();
     SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
     SimpleDateFormat hora = new SimpleDateFormat("hh:mm:ss aa");
@@ -111,6 +110,44 @@ public class FXMLPizzeriaController implements Initializable {
         spBebidas.setValueFactory(valores2);
         calcularTotal();
     }
+    
+    private void alertaPrecios() {
+        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmacion.setTitle("Proyecto Pizzeria");
+        confirmacion.setHeaderText("Necesita cargar los precios");
+        confirmacion.setContentText("¿Qué precios desea cargar?");
+
+        Stage stage = (Stage) confirmacion.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("file:resources/images/icon.png"));
+
+        ButtonType buttonDefault = new ButtonType("Por defecto");
+        ButtonType buttonArchivo = new ButtonType("Archivo de texto");
+
+        confirmacion.getButtonTypes().setAll(buttonDefault, buttonArchivo);
+
+        Optional<ButtonType> result = confirmacion.showAndWait();
+        if (result.get() == buttonDefault) {
+            precio.setPrecios();
+        } else if (result.get() == buttonArchivo) {
+            Path archivo = abrirPrecios();
+            precio.cargaPrecios(archivo);
+        }
+    }
+    
+    @FXML
+    private void calcularTotal() {
+        taPedido.setText("");
+        setMasa();
+        setTipo();
+        setIngredientes();
+        setTamano();
+        setBebida();
+        setGratinada();
+        precioFinal = pizza.calcularPrecio();
+        lbTotal.setText(String.format("%.2f", precioFinal) + " €");
+        taPedido.setText(pizza.composicion());
+    }
+
 
     private void setMasa() {
         if (btMasaNormal.isSelected()) {
@@ -156,20 +193,6 @@ public class FXMLPizzeriaController implements Initializable {
         }
     }
 
-    @FXML
-    private void calcularTotal() {
-        taPedido.setText("");
-        setMasa();
-        setTipo();
-        setIngredientes();
-        setTamano();
-        setBebida();
-        setGratinada();
-        precioFinal = pizza.calcularPrecio();
-        lbTotal.setText(String.format("%.2f", precioFinal) + " €");
-        taPedido.setText(pizza.composicion());
-    }
-
     @FXML                                                  
     private void generarTicket(ActionEvent event) {
         pizza.setNumTicket();
@@ -200,29 +223,6 @@ public class FXMLPizzeriaController implements Initializable {
         File file = fileChooser.showSaveDialog(null);
         Path archivo = file.toPath();
         pizza.generarTicket(archivo);
-    }
-
-    private void alertaPrecios() {
-        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmacion.setTitle("Proyecto Pizzeria");
-        confirmacion.setHeaderText("Necesita cargar los precios");
-        confirmacion.setContentText("¿Qué precios desea cargar?");
-
-        Stage stage = (Stage) confirmacion.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image("file:resources/images/icon.png"));
-
-        ButtonType buttonDefault = new ButtonType("Por defecto");
-        ButtonType buttonArchivo = new ButtonType("Archivo de texto");
-
-        confirmacion.getButtonTypes().setAll(buttonDefault, buttonArchivo);
-
-        Optional<ButtonType> result = confirmacion.showAndWait();
-        if (result.get() == buttonDefault) {
-            precio.setPrecios();
-        } else if (result.get() == buttonArchivo) {
-            Path archivo = abrirPrecios();
-            precio.cargaPrecios(archivo);
-        }
     }
 
     private Path abrirPrecios() {

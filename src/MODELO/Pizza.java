@@ -88,15 +88,12 @@ public class Pizza {
         this.ingredientes = ingredientes;
     }
 
-    public String composicion() {
-        double porcentaje = (PRECIO.getPrecio(tamano) - 1) * 100;
-        String pedido = "MASA: " + masa + String.format(" - %.2f", PRECIO.getPrecio(masa))
-                + "€\n" + "TIPO: " + tipo + String.format(" - %.2f", PRECIO.getPrecio(tipo)) + "€\n"
-                + "INGREDIENTES EXTRA: " + ingredientes.toString() + " - " + String.format("%.2f", precioIngr) + "€\n"
-                + "TAMAÑO: " + tamano + " + " + String.format("%.0f", porcentaje) + "%\n"
-                + "GRATINAR (+2%): " + gratinada + "\n"
-                + "BEBIDA (2€): " + bebida + " X" + numBebidas + String.format(" - %.2f", precioBebidas) + "€\n";
-        return pedido;
+    public int getNumTicket() {
+        return contTicket;
+    }
+
+    public void setNumTicket() {
+        contTicket++;
     }
 
     public double calcularPrecio() {
@@ -118,15 +115,18 @@ public class Pizza {
         return precioTot;
     }
 
-    public int getNumTicket() {
-        return contTicket;
+    public String composicion() {
+        double porcentaje = (PRECIO.getPrecio(tamano) - 1) * 100;
+        String pedido = "MASA: " + masa + String.format(" - %.2f", PRECIO.getPrecio(masa))
+                + "€\n" + "TIPO: " + tipo + String.format(" - %.2f", PRECIO.getPrecio(tipo)) + "€\n"
+                + "INGREDIENTES EXTRA: " + ingredientes.toString() + " - " + String.format("%.2f", precioIngr) + "€\n"
+                + "TAMAÑO: " + tamano + " + " + String.format("%.0f", porcentaje) + "%\n"
+                + "GRATINAR (+2%): " + gratinada + "\n"
+                + "BEBIDA (2€): " + bebida + " X" + numBebidas + String.format(" - %.2f", precioBebidas) + "€\n";
+        return pedido;
     }
 
-    public void setNumTicket() {
-        contTicket++;
-    }
-
-    public boolean generarTicket(Path ruta) {          
+    public boolean generarTicket(Path ruta) {
         try (
                  OutputStream os = new FileOutputStream(ruta.toFile());  BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os))) {
             double porcentaje = (PRECIO.getPrecio(tamano) - 1) * 100;
