@@ -1,11 +1,11 @@
 .AnchorPane {
-    -fx-background-image: url('"img/fondo.jpg"');
+    -fx-background-image: url("file:resources/images/fondo.jpg");
     -fx-background-size: 100%;
 }
 
 .button{
     -fx-text-fill: #ed1943;
-    -fx-background-image: url("'img/cheese.jpg'");
+    -fx-background-image: url("file:resources/images/cheese.jpg");
 }
 
 .label {
@@ -13,7 +13,7 @@
 }
 
 .tabPane:top{
-    -fx-background-image: url('"img/fondoPizzas.jpg"');
+    -fx-background-image: url("file:resources/images/fondoPizzas.jpg");
     -fx-border-color: #ed1943;
     -fx-border-width: 3px;
 } 

@@ -95,7 +95,7 @@ public class Pizza {
                 + "INGREDIENTES EXTRA: " + ingredientes.toString() + " - " + String.format("%.2f", precioIngr) + "€\n"
                 + "TAMAÑO: " + tamano + " + " + String.format("%.0f", porcentaje) + "%\n"
                 + "GRATINAR (+2%): " + gratinada + "\n"
-                + "BEBIDA (2€): " + bebida + String.format(" - %.2f", precioBebidas) + "€\n";
+                + "BEBIDA (2€): " + bebida + " X" + numBebidas + String.format(" - %.2f", precioBebidas) + "€";
         return pedido;
     }
 
