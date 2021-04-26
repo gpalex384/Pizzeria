@@ -126,7 +126,7 @@ public class Pizza {
         contTicket++;
     }
 
-    public boolean generarTicket(Path ruta) {           // mejorar guardado
+    public boolean generarTicket(Path ruta) {          
         try (
                  OutputStream os = new FileOutputStream(ruta.toFile());  BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os))) {
             double porcentaje = (PRECIO.getPrecio(tamano) - 1) * 100;

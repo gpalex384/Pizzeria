@@ -21,6 +21,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -169,7 +170,7 @@ public class FXMLPizzeriaController implements Initializable {
         taPedido.setText(pizza.composicion());
     }
 
-    @FXML                                                   // mejorar guardado
+    @FXML                                                  
     private void generarTicket(ActionEvent event) {
         pizza.setNumTicket();
         final DirectoryChooser directoryChooser = new DirectoryChooser();
@@ -181,10 +182,24 @@ public class FXMLPizzeriaController implements Initializable {
             pizza.generarTicket(ruta.toPath());
             taPedido.appendText("Ticket guardado --> " + ruta.getPath() + "\n");
         } else {
-            taPedido.appendText("El ticket -> " + "ticket" + pizza.getNumTicket() + ".txt ya existe\nElige otro nombre \n");
-//  Elegir otro nombre        
-
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Proyecto Pizzeria");
+            alert.setHeaderText(null);
+            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image("file:resources/images/icon.png"));
+            alert.setContentText("Ya existe un ticket con el nombre " + "ticket" + pizza.getNumTicket() + ".txt\nElige otro nombre \n");
+            alert.showAndWait();      
+            guardarComo();
         }
+    }
+
+    private void guardarComo() {
+        final FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File("tickets/"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT", "*.txt"));
+        File file = fileChooser.showSaveDialog(null);
+        Path archivo = file.toPath();
+        pizza.generarTicket(archivo);
     }
 
     private void alertaPrecios() {
@@ -192,7 +207,7 @@ public class FXMLPizzeriaController implements Initializable {
         confirmacion.setTitle("Proyecto Pizzeria");
         confirmacion.setHeaderText("Necesita cargar los precios");
         confirmacion.setContentText("¿Qué precios desea cargar?");
-    
+
         Stage stage = (Stage) confirmacion.getDialogPane().getScene().getWindow();
         stage.getIcons().add(new Image("file:resources/images/icon.png"));
 
