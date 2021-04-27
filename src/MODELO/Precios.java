@@ -10,8 +10,10 @@ import java.util.Map;
 
 public final class Precios {
 
+//  MAP CON TODOS LOS PRECIOS    
     private static final Map<String, Double> precios = new HashMap<>();
 
+//  CONSTRUCTOR, GETTERS Y SETTERS    
     public Precios() {
     }
 
@@ -36,7 +38,7 @@ public final class Precios {
         precios.put("Sin gratinar", 1.00);
     }
 
-    public void cargaPrecios(Path archivo) {
+    public void cargaPrecios(Path archivo) {    // precios de archivo .txt
         String line;
         File file = archivo.toFile();
         try ( BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -57,7 +59,7 @@ public final class Precios {
         return precios;
     }
 
-    public double getPrecio(String ing) {
+    public double getPrecio(String ing) {   // precio por ingrediente
         return precios.get(ing);
     }
 

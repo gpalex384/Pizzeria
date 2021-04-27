@@ -40,6 +40,7 @@ import javafx.stage.Stage;
 
 public class FXMLPizzeriaController implements Initializable {
 
+//  VARIABLES
     @FXML
     private ToggleGroup masa;
     @FXML
@@ -110,7 +111,8 @@ public class FXMLPizzeriaController implements Initializable {
         spBebidas.setValueFactory(valores2);
         calcularTotal();
     }
-    
+
+//  PREGUNTA AL INICIO: CARGAR VALORES POR DEFECTO O ARCHIVO .txt    
     private void alertaPrecios() {
         Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
         confirmacion.setTitle("Proyecto Pizzeria");
@@ -133,7 +135,20 @@ public class FXMLPizzeriaController implements Initializable {
             precio.cargaPrecios(archivo);
         }
     }
-    
+
+//  fileChooser PARA ELEGIR EL ARCHIVO .txt DE PRECIOS    
+    private Path abrirPrecios() {
+        final FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File("precios/"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT", "*.txt"));
+        File file = fileChooser.showOpenDialog(null);
+        if (file != null) {
+            return file.toPath();
+        }
+        return null;
+    }
+
+//  CALCULA EL PRECIO AL INICIO Y AL CAMBIAR ALGUNA OPCION    
     @FXML
     private void calcularTotal() {
         taPedido.setText("");
@@ -148,7 +163,7 @@ public class FXMLPizzeriaController implements Initializable {
         taPedido.setText(pizza.composicion());
     }
 
-
+//  RECOGE SELECCION DEL USUARIO Y LA DEFINE EN EL OBJETO PIZZA    
     private void setMasa() {
         if (btMasaNormal.isSelected()) {
             pizza.setMasa("Normal");
@@ -193,7 +208,8 @@ public class FXMLPizzeriaController implements Initializable {
         }
     }
 
-    @FXML                                                  
+//  GENERA TICKET AL PULSAR EL BOTON, CON FORMATO: ticket1.txt, ticket2.txt, ...    
+    @FXML
     private void generarTicket(ActionEvent event) {
         pizza.setNumTicket();
         final DirectoryChooser directoryChooser = new DirectoryChooser();
@@ -205,17 +221,19 @@ public class FXMLPizzeriaController implements Initializable {
             pizza.generarTicket(ruta.toPath());
             taPedido.appendText("Ticket guardado --> " + ruta.getPath() + "\n");
         } else {
+//  SI EXISTE UN TICKET CON ESE NOMBRE AVISA, Y LLAMA AL METODO guardarComo()            
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Proyecto Pizzeria");
             alert.setHeaderText(null);
             Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
             stage.getIcons().add(new Image("file:resources/images/icon.png"));
             alert.setContentText("Ya existe un ticket con el nombre " + "ticket" + pizza.getNumTicket() + ".txt\nElige otro nombre \n");
-            alert.showAndWait();      
+            alert.showAndWait();
             guardarComo();
         }
     }
 
+//  fileChooser PARA ELEGIR EL NOMBRE DEL TICKET    
     private void guardarComo() {
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File("tickets/"));
@@ -225,17 +243,7 @@ public class FXMLPizzeriaController implements Initializable {
         pizza.generarTicket(archivo);
     }
 
-    private Path abrirPrecios() {
-        final FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(new File("precios/"));
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT", "*.txt"));
-        File file = fileChooser.showOpenDialog(null);
-        if (file != null) {
-            return file.toPath();
-        }
-        return null;
-    }
-
+//  IMPRIME EN EL TextArea UN TICKET GUARDADO EN UN ARCHIVO .txt 
     @FXML
     private void abrirTicket(ActionEvent event) {
         final FileChooser fileChooser = new FileChooser();

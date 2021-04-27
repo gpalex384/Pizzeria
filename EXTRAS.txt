@@ -1,6 +1,0 @@
-- numero bebidas
-
-- abrir tickets
-
-- label fecha y hora	
-

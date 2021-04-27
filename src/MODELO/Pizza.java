@@ -13,6 +13,7 @@ import java.util.Set;
 
 public class Pizza {
 
+//  VARIABLES
     private String masa = "";
     private String tipo = "";
     private String tamano = "";
@@ -28,6 +29,7 @@ public class Pizza {
     SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
     SimpleDateFormat hora = new SimpleDateFormat("hh:mm:ss aa");
 
+// CONSTRUCTOR, GETTERS Y SETTERS    
     public Pizza() {
 
     }
@@ -96,6 +98,7 @@ public class Pizza {
         contTicket++;
     }
 
+//  CALCULA EL PRECIO DE LA PIZZA    
     public double calcularPrecio() {
         double precioTot = 0.00;
         precioIngr = 0.00;
@@ -115,6 +118,7 @@ public class Pizza {
         return precioTot;
     }
 
+//  INFORMACION DE LA PIZZA QUE SE MUESTRA EN TextArea
     public String composicion() {
         double porcentaje = (PRECIO.getPrecio(tamano) - 1) * 100;
         String pedido = "MASA: " + masa + String.format(" - %.2f", PRECIO.getPrecio(masa))
@@ -126,6 +130,7 @@ public class Pizza {
         return pedido;
     }
 
+//  GENERA Y GUARDA EL TICKET
     public boolean generarTicket(Path ruta) {
         try (
                  OutputStream os = new FileOutputStream(ruta.toFile());  BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os))) {
